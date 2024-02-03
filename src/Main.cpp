@@ -3,6 +3,8 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include <Shader.h>
+
 int main(int argc, char** argv)
 {
 	// Initialize GLFW
@@ -45,11 +47,17 @@ int main(int argc, char** argv)
 	// Fill the vertex buffer with data
 	glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW);
 
+	// Bind Shader to the program
+	Shader shader("res/shader/SimpleShader.vertSL",
+			"res/shader/SimpleShader.fragSL");
+
 	// Loop until the user closes the window
 	while (!glfwWindowShouldClose(window))
 	{
 		// Render here
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		shader.Bind();
 
 		// Draw a triangle
 		// 1. Bind the vertex buffer
